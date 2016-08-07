@@ -1,11 +1,13 @@
 {
   "name": "serial-api-mocker",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "src/server/index.js",
   "scripts": {
+    "pretest": "node_modules/.bin/eslint src/**",
     "test": "node_modules/.bin/istanbul cover _mocha --report lcovonly -- ./tests",
-    "posttest": "node_modules/.bin/codecov"
+    "posttest": "node_modules/.bin/codecov",
+    "build": "node_modules/.bin/gulp"
   },
   "author": "Hikkyu (Damien Berseron)",
   "license": "ISC",
@@ -19,8 +21,15 @@
   },
   "devDependencies": {
     "codecov": "^1.0.1",
+    "del": "^2.2.1",
+    "eslint": "^3.2.2",
+    "gulp": "^3.9.1",
+    "gulp-install": "^0.6.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-shrinkwrap": "^2.0.1",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.1",
+    "run-sequence": "^1.2.2",
     "supertest": "^2.0.0"
   }
 }
