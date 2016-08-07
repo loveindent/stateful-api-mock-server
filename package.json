@@ -1,0 +1,23 @@
+{
+  "name": "serial-api-mocker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha ./tests"
+  },
+  "author": "Hikkyu (Damien Berseron)",
+  "license": "ISC",
+  "dependencies": {
+    "api-error-handler": "^1.0.0",
+    "body-parser": "^1.15.2",
+    "config": "^1.21.0",
+    "express": "^4.14.0",
+    "fs-extra": "^0.30.0",
+    "lodash": "^4.14.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.1",
+    "supertest": "^2.0.0"
+  }
+}

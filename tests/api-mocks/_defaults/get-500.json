@@ -1,0 +1,5 @@
+{
+  "error": "Internal Server Error",
+  "messageCode": "error.globalGet500",
+  "status": 500
+}

@@ -1,0 +1,53 @@
+---
+  env:
+    browser: true
+    node: true
+    es6: true
+    mocha: true
+
+  extends:
+    - "eslint:recommended"
+
+  globals:
+    Utils: true
+    Libs: true
+    _: true
+
+  rules:
+    "array-bracket-spacing":
+      - warn
+      - never
+    "block-spacing": warn
+    "brace-style":
+      - error
+      - stroustrup
+    "eol-last": error
+    indent:
+      - warn
+      - 2
+      - SwitchCase: 1
+    "jsx-quotes": warn
+    "key-spacing": warn
+    "keyword-spacing": warn
+    "newline-after-var": warn
+    "newline-before-return": warn
+    "no-lonely-if": error
+    "no-multi-spaces": warn
+    "no-whitespace-before-property": error
+    "padded-blocks":
+      - error
+      - never
+    quotes:
+      - warn
+      - single
+    semi:
+      - warn
+      - always
+    "space-before-blocks": warn
+    "space-before-function-paren":
+      - warn
+      - never
+    "space-infix-ops":
+      - error
+      - int32Hint: false
+    "space-unary-ops": warn
