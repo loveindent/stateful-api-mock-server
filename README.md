@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/loveindent/serial-api-mocker.svg?branch=master)](https://travis-ci.org/loveindent/serial-api-mocker)
 ![Build Status](https://david-dm.org/loveindent/serial-api-mocker.svg)
+[![codecov](https://codecov.io/gh/loveindent/serial-api-mocker/branch/master/graph/badge.svg)](https://codecov.io/gh/loveindent/serial-api-mocker)
 
 # Serial API Mocker
 Another yet api mock server. Why? Because it has to be simple and I didn't find a simple one. Just put a js/json file into a directory, start your server from your mocha/karma/andWhateverOtherHypsterTestRunner and use the simple API to create your tests cases.
