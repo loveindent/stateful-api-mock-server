@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/server/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./tests"
+    "test": "node_modules/.bin/istanbul cover _mocha --report lcovonly -- ./tests",
+    "posttest": "node_modules/.bin/codecov"
   },
   "author": "Hikkyu (Damien Berseron)",
   "license": "ISC",
@@ -17,6 +18,8 @@
     "lodash": "^4.14.1"
   },
   "devDependencies": {
+    "codecov": "^1.0.1",
+    "istanbul": "^0.4.4",
     "mocha": "^3.0.1",
     "supertest": "^2.0.0"
   }
