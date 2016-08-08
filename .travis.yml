@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-- '5'
-- '4'
-after_sucess:
-- npm run build
+  - '5'
+  - '4'
+after_success:
+  - npm run build
 deploy:
   provider: npm
   email: damien.berseron@me.com
