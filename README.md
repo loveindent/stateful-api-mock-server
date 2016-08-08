@@ -1,16 +1,17 @@
 # Stateful API mock server
 
-[![Build Status](https://travis-ci.org/loveindent/serial-api-mocker.svg?branch=master)](https://travis-ci.org/loveindent/serial-api-mocker)
-![Build Status](https://david-dm.org/loveindent/serial-api-mocker.svg)
-[![codecov](https://codecov.io/gh/loveindent/serial-api-mocker/branch/master/graph/badge.svg)](https://codecov.io/gh/loveindent/serial-api-mocker)
+[![Build Status](https://travis-ci.org/loveindent/stateful-api-mock-server.svg?branch=master)](https://travis-ci.org/loveindent/stateful-api-mock-server)
+![Build Status](https://david-dm.org/loveindent/stateful-api-mock-server.svg)
+[![codecov](https://codecov.io/gh/loveindent/stateful-api-mock-server/branch/master/graph/badge.svg)](https://codecov.io/gh/loveindent/stateful-api-mock-server)
 
-Another yet api mock server. Why? Because it has to be simple and I didn't find a simple one for my case (independent api) based on directory file. It's mostly useful if your api use another api.
+Yet another API mock server. Why? Because it has to be simple and I didn't find a simple one in my case (independent api) based on directory file. It's mostly useful if your api use another api.
 
-Just put a js/json file into a directory, start your server from your mocha/karma/etc and use the simple API to create your tests cases.
+Just put a js/json file into a directory, start your server from your mocha/karma/etc and use the simple API to create your test cases.
 
-# Feature
-- Mock server served from js/json file where ever you want
-- Easy to use api base on route paths
+# Features
+- Independent mock server
+- Totally stateful to facilitate unit tests
+- Easy to use state API base on route paths
 
 # How to use
 
@@ -19,10 +20,28 @@ Just put a js/json file into a directory, start your server from your mocha/karm
 ```js
 var ApiMockServer = require('stateful-api-mock-server');
 
-var api = new ApiMockServer([options]);
+var api = new ApiMockServer([options<object>]);
 
 api.start(function(){
   // write your tests case here
+});
+```
+or with mocha
+```js
+var ApiMockServer = require('stateful-api-mock-server');
+
+var api = new ApiMockServer([options<object>]);
+
+describe('[API]', function() {
+  before(function(done) {
+    return api.start(function() {
+      done();
+    });
+  });
+
+  it('should do something', function() {
+    //...
+  });
 });
 ```
 
@@ -42,12 +61,11 @@ tests/api-mocks/
 ```
 
 ## Use default case
-
-It's possible to define common response in a `_default` directory.
+It's possible to define common response in a `_defaults` directory to avoid file duplication, like 404.
 
 ```shell
 tests/api-mocks/
-  L _default
+  L _defaults
      L get-404.json # 404 GET default response
   L users/
      L get.json     # 200 GET /users response
@@ -58,12 +76,12 @@ tests/api-mocks/
      L get.json     # 200 GET /cars response
 ```
 
-## Change response stats
-Imagine this tests cases suite:
+## Change response state
+Imagine this test case suite:
 
 ```js
 describe('api', function() {
-  it('should respond with a use', function(done) {
+  it('should respond with a 200', function(done) {
     request(app)
       .get('/users')
       .set('Accept', 'application/json')
@@ -76,7 +94,7 @@ describe('api', function() {
 Now you want to test the 404 case
 ```js
 describe('api', function() {
-  it('should respond with a use', function(done) {
+  it('should respond with a 404', function(done) {
     api.state.set('/users', 'GET', 404);
 
     request(app)
@@ -102,9 +120,9 @@ describe('api', function() {
 # API
 
 ## Constructor API
-
+Default values:
 ```js
-var api = new SerialApiMocker({
+var api = new ApiMockServer({
   port: 7000, // Port to launch mocked api
   mockDir: 'tests/api-mocks', // Relative path to your mocks
 });
@@ -125,7 +143,7 @@ api.state.get('/users/:id', 'GET');
 ```
 
 ### Reset
-Reset to 200 all routes
+Reset all routes to 200
 ```js
 api.state.reset();
 ```
