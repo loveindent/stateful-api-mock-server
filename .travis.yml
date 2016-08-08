@@ -2,11 +2,5 @@ language: node_js
 node_js:
 - '5'
 - '4'
-deploy:
-  provider: npm
-  email: damien.berseron@me.com
-  api_key:
-    secure: m1444EQR8mwq95hUlrYcqz4v8+KBsVfDcHhEmq7SUAfJPh0KJLPrRERbWbLIdVCNt/IOyKmA3Tq96DW+XU2DIYl6msvY8ZTaabWSwSdUTmTXi84MFpfcnGkopI/eNyC+DPS4Yrro0od4o7ojKp7dTZcyM6fsxInewf1pOYyadOfWkpziBM2gqe+lbKea8cIRJAxR0Vz2uoPKbdem+scKBQJKGpsQVlR9sR/LLssTylHvJoQID/8KV0CtTHFo7dMv9Frf4NMfXA+KzUzRMcbVq3iPwwsq0X6b9j8Rnq2Qv56i2eF5aBoG+AFySSiixLw51hK39pkg9+XC6HtoxOrXfaJnP8ZYuy1bNpU9kcxnFRotOchKyoHVfAGb7tjLRIZ5ylhj5SfJvunZA0pvSgtU2HfXHw87iqRGjadeXUS6XSY/GcRK5LxjpLzCxiG6XHCBT95PXk6Dcitx04Bi5wqDwznc604Y1Yv8qATHmc4EBJxVhkDDvfAbJ0SawlUyGJQMeNb5FFZeupTF1pxap/GtN3dpVUDcoCGi6/5FV+ZxDKSftQICwIM1pKcvKU062dKfsJSy35FjKZJmxYMIA9jVOau97kdV3Ebl/wWpOBNeqM0KANYKPWzcLRSMyTzVIZU8jLeiiW6/PcEzIE1PJHDMhie4LgO38+3zf/FMgtLPvx0=
-  on:
-    tags: true
-    repo: loveindent/serial-api-mocker
+after_sucess:
+  - npm run build
