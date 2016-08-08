@@ -112,7 +112,7 @@ describe('api', function() {
   ...
 
   afterEach(function() {
-    api.state.reset();
+    api.state.resetAll();
   });
 })
 ```
@@ -131,21 +131,33 @@ var api = new ApiMockServer({
 ## State API
 
 ### Set
-Set a route to demanded status
+Set a route to demanded state
 ```js
 api.state.set('/users/:id', 'GET', 404);
 ```
 
 ### Get
-Get a route status
+Get a route state
 ```js
 api.state.get('/users/:id', 'GET');
 ```
 
+### Get All
+Get all route states
+```js
+api.state.getAll();
+```
+
 ### Reset
+Reset a state to 200
+```js
+api.state.reset('/users/:id', 'GET');
+```
+
+### Reset All
 Reset all routes to 200
 ```js
-api.state.reset();
+api.state.resetAll();
 ```
 
 # TODO

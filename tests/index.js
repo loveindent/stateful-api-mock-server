@@ -63,6 +63,17 @@ describe('[API]', function() {
     });
   });
 
+  describe('/users/email', function() {
+    it('should respond with 200', function(done) {
+      request(app)
+        .get('/users/email')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, {what: 'get an email'}, done)
+      ;
+    });
+  });
+
   describe('/users/id/player', function() {
     it('should respond with 200', function(done) {
       request(app)

@@ -11,6 +11,12 @@ var constructRoutes = function(items) {
     router[item.verb](item.route, function(req, res, next) { //eslint-disable-line no-unused-vars
       var s = Libs.state.get(item.route, item.verb);
 
+      if (!_.isEmpty(req.params) && _.has(Libs.state.getAll(), req.path + '.' + _.upperCase(item.verb))) {
+        return next('route');
+      }
+
+      debug(req.path + ' called. Current state is ' + s + '. Route is ' + req.route.path);
+
       if (s !== 200) {
         var json;
         var pathToRequire = path.join(item.dir, item.verb + '-' + s + item.ext);

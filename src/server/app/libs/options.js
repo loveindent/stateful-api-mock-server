@@ -1,5 +1,5 @@
 var path = require('path');
-var defaultOptions = require('config').get('defaultOptions');
+var defaultOptions = require(path.join(__dirname, '../../../../', 'config/default')).defaultOptions;
 var _options = {};
 
 function init(options) {
