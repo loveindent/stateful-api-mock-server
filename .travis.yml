@@ -3,4 +3,14 @@ node_js:
 - '5'
 - '4'
 after_sucess:
-  - npm run build
+- npm run build
+deploy:
+  provider: npm
+  email: damien.berseron@me.com
+  file: archive.tar.gz
+  api_key:
+    secure: NFzArfH2+80s/cLmOeOzkKBg7MjznPd+K+ySEnUM98cTHGN16odcKCN7lfNDl9sHin0o6Dv88ei8/Y+VxBfNaM7sWSUHBsvwahQxHCcoTA2Dls9VfgPLHR+yYmMiOP3HmCuWP1k5CjtG8PBqjyL2Nky8ZmYLLN7L/e7JahA+0zmDkwtNG4uRvCJ3V6lHSnE3Upt81vkBE4SrCHRHbam2Qutrr+iWj0OWX8zeQE7RgQzbhE9x0rZ+wctmAS6ly053REUjtMIaiTNoMwaDS2zT0jaGVuObkEyF19Yyu70J9gI1sWdMVNrGOfPfVwwxIS0q/fFY4MIvZjs9a+6UP8oDcrywt+2qG1lomwd0sWYxS0vSEGqjvj4+BUNnZzGV4mLtoEOgUHfAUW1OKMDBZZwmYttGTEjW1lj2ojZtN0ozsLgnWJbO7TlXlD7VhpRXhbY2LB2BfLuKbxX/e5nfWPkj6apFMCVEOAuGo0fL8qXP90IdTy2GMvqut5DLTwp31vWR8pjRF0vI1kAXqHLWaUmqzSLRJEJUtBdqrFeSZRvaUghB70jKtyjdrdfV95f5qO7TmijBAhwhTkfgtgUz89ziF9Gv3kEF+pxR1DJumeGggNcs8Q8oXFjOArtsxEJ5+Ui9LmcPX6H5lIdlD9V7iwzIebislCSPYg82o4V/RNMJbD4=
+  on:
+    branch: master
+    tags: true
+    repo: loveindent/stateful-api-mock-server
