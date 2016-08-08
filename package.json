@@ -1,6 +1,6 @@
 {
   "name": "stateful-api-mock-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Stateful API mock server to manage responses of any API from files",
   "main": "src/server/index.js",
   "scripts": {
