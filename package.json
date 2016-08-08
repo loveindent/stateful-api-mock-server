@@ -1,7 +1,7 @@
 {
-  "name": "serial-api-mocker",
+  "name": "stateful-api-mock-server",
   "version": "1.0.1",
-  "description": "",
+  "description": "Stateful API mock server to manage responses of any API from files",
   "main": "src/server/index.js",
   "scripts": {
     "pretest": "node_modules/.bin/eslint src/**",

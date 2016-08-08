@@ -1,9 +1,10 @@
+# Stateful API mock server
+
 [![Build Status](https://travis-ci.org/loveindent/serial-api-mocker.svg?branch=master)](https://travis-ci.org/loveindent/serial-api-mocker)
 ![Build Status](https://david-dm.org/loveindent/serial-api-mocker.svg)
 [![codecov](https://codecov.io/gh/loveindent/serial-api-mocker/branch/master/graph/badge.svg)](https://codecov.io/gh/loveindent/serial-api-mocker)
 
-# Serial API Mocker
-Another yet api mock server. Why? Because it has to be simple and I didn't find a simple one for my case (independent api) based on directory file. It's almost useful if your api use another api.
+Another yet api mock server. Why? Because it has to be simple and I didn't find a simple one for my case (independent api) based on directory file. It's mostly useful if your api use another api.
 
 Just put a js/json file into a directory, start your server from your mocha/karma/etc and use the simple API to create your tests cases.
 
@@ -16,9 +17,9 @@ Just put a js/json file into a directory, start your server from your mocha/karm
 ## In your tests file
 
 ```js
-var SerialApiMocker = require('serial-api-mocker');
+var ApiMockServer = require('stateful-api-mock-server');
 
-var api = new SerialApiMocker([options]);
+var api = new ApiMockServer([options]);
 
 api.start(function(){
   // write your tests case here
