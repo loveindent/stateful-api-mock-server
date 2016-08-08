@@ -13,6 +13,7 @@ gulp.task('copy', function() {
   return gulp.src([
     'config/**',
     'src/**',
+    'README.md',
     'package.json'
   ], {base: '.'})
     .pipe(plumber())
