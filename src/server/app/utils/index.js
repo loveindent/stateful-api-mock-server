@@ -1,3 +1,6 @@
 global.Utils = {
-  log: require('./logger')
+  log: require('./logger'),
+  logError: require('./logError')
 };
+
+module.exports = global.Utils;

@@ -1,0 +1,3 @@
+{
+  "_route": "/users/:id/get-test.json"
+}

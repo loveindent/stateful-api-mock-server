@@ -1,6 +1,6 @@
 var fs = require('fs-extra');
 var path = require('path');
-var debug = require('debug')('api-json-mocker:app:libs:parseJsonFilesToRoutes');
+var debug = require('debug')('stateful-api-mock-server:app:libs:parseJsonFilesToRoutes');
 
 var parseJsonFiles = function(options, cb) {
   var items = [];
