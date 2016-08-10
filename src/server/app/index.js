@@ -3,7 +3,7 @@ var notFoundHandler = require('./middlewares/notFoundJson');
 var errorHandler = require('api-error-handler');
 var bodyParser = require('body-parser');
 var express = require('express');
-var debug = require('debug')('api-json-mocker:app');
+var debug = require('debug')('stateful-api-mock-server:app');
 
 var app = express();
 

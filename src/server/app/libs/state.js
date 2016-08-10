@@ -1,4 +1,4 @@
-var debug = require('debug')('api-json-mocker:state');
+var debug = require('debug')('stateful-api-mock-server:state');
 var state = {};
 
 function initState(route, verb) {
@@ -46,11 +46,18 @@ function getAllState() {
   return state;
 }
 
+function __deleteAllState() {
+  state = {};
+}
+
 module.exports = {
   _init: initState,
   get: getState,
   getAll: getAllState,
   set: setState,
   reset: resetState,
-  resetAll: resetAllState
+  resetAll: resetAllState,
+
+  // Testing method
+  __deleteAll: __deleteAllState
 };

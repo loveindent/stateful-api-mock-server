@@ -8,6 +8,28 @@ Yet another API mock server. Why? Because it has to be simple and I didn't find 
 
 Just put a js/json file into a directory, start your server from your mocha/karma/etc and use the simple API to create your test cases.
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Stateful API mock server](#stateful-api-mock-server)
+- [Features](#features)
+- [How to use](#how-to-use)
+	- [In your tests file](#in-your-tests-file)
+	- [Endpoints to File directory](#endpoints-to-file-directory)
+	- [Use default case](#use-default-case)
+	- [Change response state](#change-response-state)
+- [API](#api)
+	- [Constructor API](#constructor-api)
+	- [State API](#state-api)
+		- [Set `.set(Path<String>, Verb<String>, State<Number|String>)`](#set-setpathstring-verbstring-statenumberstring)
+		- [Get `.get(Path<String>, Verb<String>)`](#get-getpathstring-verbstring)
+		- [Get All `.getAll()`](#get-all-getall)
+		- [Reset `.reset(Path<String>, Verb<String>)`](#reset-resetpathstring-verbstring)
+		- [Reset All `.resetAll()`](#reset-all-resetall)
+- [Debug](#debug)
+- [TODO](#todo)
+
+<!-- /TOC -->
+
 # Features
 - Independent mock server
 - Totally stateful to facilitate unit tests
@@ -106,6 +128,10 @@ describe('api', function() {
 })
 ```
 
+> <b>/!\ Important!</b><br/>
+> If you set a state to unknown construct file (like GET 403 and ./get-403 and /\_defaults/get-403 does not exist) it will return 503 and log an error in your terminal
+
+
 Finally you can reset all
 ```js
 describe('api', function() {
@@ -130,34 +156,47 @@ var api = new ApiMockServer({
 
 ## State API
 
-### Set
-Set a route to demanded state
+### Set `.set(Path<String>, Verb<String>, State<Number|String>)`
+Set a route to demanded state and set status response if State is a number.
 ```js
+// Return get-404.[ext] file and set
 api.state.set('/users/:id', 'GET', 404);
+
+// Return get-another.[ext] file and set status to 200
+api.state.set('/users/:id', 'GET', 'another');
 ```
 
-### Get
+### Get `.get(Path<String>, Verb<String>)`
 Get a route state
 ```js
 api.state.get('/users/:id', 'GET');
 ```
 
-### Get All
+### Get All `.getAll()`
 Get all route states
 ```js
 api.state.getAll();
 ```
 
-### Reset
+### Reset `.reset(Path<String>, Verb<String>)`
 Reset a state to 200
 ```js
 api.state.reset('/users/:id', 'GET');
 ```
 
-### Reset All
+### Reset All `.resetAll()`
 Reset all routes to 200
 ```js
 api.state.resetAll();
+```
+
+# Debug
+
+To debug you can filter on this domain: `stateful-api-mock-server`
+
+For example
+```shell
+DEBUG=stateful-api-mock-server:* npm test
 ```
 
 # TODO

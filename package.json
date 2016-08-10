@@ -1,15 +1,22 @@
 {
   "name": "stateful-api-mock-server",
   "version": "1.0.6",
-  "description": "Stateful API mock server to manage responses of any API from files",
+  "description": "Stateful API mock server to manage responses of any external API from files",
   "main": "src/server/index.js",
   "scripts": {
     "pretest": "node_modules/.bin/eslint src/**",
-    "test": "node_modules/.bin/istanbul cover _mocha --report lcovonly -- ./tests",
+    "test": "node_modules/.bin/istanbul cover _mocha -- ./src/**/*.spec.js ./tests",
     "posttest": "node_modules/.bin/codecov",
     "build": "node_modules/.bin/gulp"
   },
   "author": "Hikkyu (Damien Berseron)",
+  "bugs": {
+    "url": "https://github.com/loveindent/stateful-api-mock-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loveindent/stateful-api-mock-server.git"
+  },
   "license": "ISC",
   "dependencies": {
     "api-error-handler": "^1.0.0",
@@ -19,6 +26,7 @@
     "lodash": "^4.14.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "codecov": "^1.0.1",
     "del": "^2.2.1",
     "eslint": "^3.2.2",
@@ -30,7 +38,9 @@
     "gulp-tar": "^1.9.0",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.1",
+    "mock-require": "^1.3.0",
     "run-sequence": "^1.2.2",
+    "sinon": "^1.17.5",
     "supertest": "^2.0.0"
   }
 }

@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var path = require('path');
-var debug = require('debug')('api-json-mocker:app:routes:dynamicRoutes');
+var debug = require('debug')('stateful-api-mock-server:app:routes:dynamicRoutes');
 
 var constructRoutes = function(items) {
   var options = Libs.options.get();
@@ -25,12 +25,36 @@ var constructRoutes = function(items) {
           json = require(pathToRequire);
         }
         catch (err) {
-          var defaultPathToRequire = path.join(options.absoluteDefaultMockDir, item.verb + '-' + s + options.ext);
+          try {
+            var defaultPathToRequire = path.join(options.absoluteDefaultMockDir, item.verb + '-' + s + options.ext);
 
-          debug(pathToRequire + ' does not exist, fallbacked to: ' + defaultPathToRequire);
-          json = require(defaultPathToRequire);
+            debug(pathToRequire + ' does not exist, fallbacked to: ' + defaultPathToRequire);
+            json = require(defaultPathToRequire);
+          }
+          catch (err) {
+            debug(err.name + ' ' + err.message);
+            var requireError = err;
+
+            json = {
+              message: err.message,
+              name: 'ApiMockServerError',
+              type: err.type,
+              arguments: err.arguments
+            };
+            s = 503;
+          }
         }
-        res.status(s).send(json);
+
+        if (requireError) {
+          requireError.name = 'ApiMockServerError';
+          Utils.logError(requireError);
+        }
+
+        if (_.isNumber(s)) {
+          res.status(s);
+        }
+
+        res.send(json);
       }
       else {
         res.send(require(item.file));
