@@ -32,6 +32,9 @@
     "newline-after-var": warn
     "newline-before-return": warn
     "no-lonely-if": error
+    "no-multiple-empty-lines":
+      - warn
+      - max: 1
     "no-multi-spaces": warn
     "no-whitespace-before-property": error
     "padded-blocks":
@@ -43,6 +46,10 @@
     semi:
       - warn
       - always
+    "semi-spacing":
+      - warn
+      - before: false
+        after: true
     "space-before-blocks": warn
     "space-before-function-paren":
       - warn
