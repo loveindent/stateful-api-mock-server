@@ -10,11 +10,16 @@ function start(cb) {
   });
 }
 
+function stop(cb) {
+  app.unmount(cb);
+}
+
 module.exports = function SerialMocker(options) {
   Libs.options.init(options);
 
   return {
     start: start,
+    stop: stop,
     state: Libs.state,
     app: app.self
   };

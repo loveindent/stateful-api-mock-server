@@ -19,6 +19,8 @@ Just put a js/json file into a directory, start your server from your mocha/karm
 	- [Change response state](#change-response-state)
 - [API](#api)
 	- [Constructor API](#constructor-api)
+		- [Start `.start([callback<Function>])`](#start-startcallbackfunction)
+		- [Stop `.stop([callback<Function>])`](#stop-stopcallbackfunction)
 	- [State API](#state-api)
 		- [Set `.set(Path<String>, Verb<String>, State<Number|String>)`](#set-setpathstring-verbstring-statenumberstring)
 		- [Get `.get(Path<String>, Verb<String>)`](#get-getpathstring-verbstring)
@@ -132,13 +134,24 @@ describe('api', function() {
 > If you set a state to unknown construct file (like GET 403 and ./get-403 and /\_defaults/get-403 does not exist) it will return 503 and log an error in your terminal
 
 
-Finally you can reset all
+After each you can reset all
 ```js
 describe('api', function() {
   ...
 
   afterEach(function() {
     api.state.resetAll();
+  });
+})
+```
+
+Finally you can shut down your Mocked API
+```js
+describe('api', function() {
+  ...
+
+  after(function(done) {
+    api.stop(done);
   });
 })
 ```
@@ -151,6 +164,20 @@ Default values:
 var api = new ApiMockServer({
   port: 7000, // Port to launch mocked api
   mockDir: 'tests/api-mocks', // Relative path to your mocks
+});
+```
+
+### Start `.start([callback<Function>])`
+```js
+api.start(function() {
+  // hello api :-)
+});
+```
+
+### Stop `.stop([callback<Function>])`
+```js
+api.stop(function() {
+  // Good by api :-(
 });
 ```
 

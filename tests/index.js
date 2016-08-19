@@ -5,17 +5,15 @@ var SAM = require('../src/server');
 var api = new SAM({
   port: 7000
 });
-var app = api.app;
+var app = 'http://localhost:7000';
 
 var globalGet500 = require('./api-mocks/_defaults/get-500.json');
 var globalGet404 = require('./api-mocks/_defaults/get-404.json');
 var localPlayerGet404 = require('./api-mocks/users/:id/player/get-404.json');
 
-describe('[API]', function() {
+describe('API:Endpoints', function() {
   before(function(done) {
-    return api.start(function() {
-      done();
-    });
+    return api.start(done);
   });
 
   afterEach(function() {
@@ -168,6 +166,50 @@ describe('[API]', function() {
         .expect('Content-Type', /json/)
         .expect(404, localPlayerGet404, done)
       ;
+    });
+  });
+});
+
+describe('API:Server', function() {
+  it('should respond with 500 when server is unmount', function(done) {
+    api.stop(function() {
+      request(app)
+        .get('/users/32')
+        .end(function(err) {
+          expect(err.code).to.equal('ECONNREFUSED');
+          done();
+        })
+      ;
+    });
+  });
+
+  it('should respond ok when server as restart', function(done) {
+    api.start(function() {
+      request(app)
+        .get('/users/id/player')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+      ;
+    });
+  });
+
+  it('should stop and start on another port', function(done) {
+    var api2 = new SAM({
+      port: 7002
+    });
+    var app2 = 'http://localhost:7002';
+
+    api.stop(function() {
+      api2.start(function() {
+        request(app2)
+          .get('/users/id/player')
+          .set('Accept', 'application/json')
+          .end(function(err) {
+            console.log(err);
+            done();
+          })
+        ;
+      });
     });
   });
 });

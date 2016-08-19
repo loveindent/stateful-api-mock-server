@@ -5,10 +5,12 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var debug = require('debug')('stateful-api-mock-server:app');
 
-var app = express();
+var server;
 
-var mount = function appStart(params, cb) {
+function mount(params, cb) {
   debug('mounting app');
+
+  var app = express();
 
   app.use(bodyParser.json());
 
@@ -17,16 +19,21 @@ var mount = function appStart(params, cb) {
   app.use(notFoundHandler());
   app.use(errorHandler());
 
-  app.listen(Libs.options.get().port, function() {
+  server = app.listen(Libs.options.get().port, function() {
     debug('API Mock server started on port ' + Libs.options.get().port);
 
     if (_.isFunction(cb)) {
       cb();
     }
   });
-};
+}
+
+function unmount(cb) {
+  debug('unmounting app');
+  server.close(cb);
+}
 
 module.exports = {
   mount: mount,
-  self: app
+  unmount: unmount
 };
